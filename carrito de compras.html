@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catálogo de Productos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f9ff;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(135deg, #00b4d8, #0077b6);
+      color: white;
+      text-align: center;
+      font-size: 25px;
+      padding: 40px 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      list-style: none;
+      background: #0096c7;
+      padding: 15px 10px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ffe066;
+    }
+
+    .product-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .product {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 250px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+    }
+
+    .product img {
+      width: 150px;
+      height: auto;
+      margin-bottom: 15px;
+    }
+
+    .product h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .product p {
+      font-size: 16px;
+      color: #777;
+    }
+
+    .product .price {
+      font-size: 20px;
+      color: #00b4d8;
+      margin: 15px 0;
+    }
+
+    .product button {
+      padding: 10px 20px;
+      background: #00b4d8;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .product button:hover {
+      background: #0077b6;
+    }
+
+    .cart-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #0077b6;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .cart-link:hover {
+      background: #00b4d8;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Catálogo de Productos con Promociones</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="carrito.html">Carrito</a></li>
+    </ul>
+  </nav>
+
+  <div class="product-list" id="product-list">
+    <!-- Producto 1 -->
+    <div class="product">
+      <img src="https://lavictoria.ec/wp-content/uploads/2024/05/MOCHILA-PARA-LAPTOP-DE-15P-TE-ACS9010-TEROS-1.jpg" alt="Producto 1">
+      <h3>MOCHILA</h3>
+      <p>Lleva tu Mochila a todo lado con tu estilo book</p>
+      <p class="price">$15.99</p>
+      <button onclick="addToCart('Producto 1', 15.99)">Añadir al carrito</button>
+    </div>
+    <!-- Producto 2 -->
+    <div class="product">
+      <img src="https://comsucre.com.ec/wp-content/uploads/2023/11/SH.MA_.300.png" alt="Producto 2">
+      <h3>MARCADORES</h3>
+      <p>La belleza está en el dibujar y para eso necesitas esta colección</p>
+      <p class="price">$22.50</p>
+      <button onclick="addToCart('Producto 2', 22.50)">Añadir al carrito</button>
+    </div>
+    <!-- Producto 3 -->
+    <div class="product">
+      <img src="https://imprentamachala.com/images/uploads/Agendas/agendas-corporativas-machala.png" alt="Producto 3">
+      <h3>AGENDAS</h3>
+      <p>Donde quieras anotar yo siempre estaré aquí para ser tu recordatorio</p>
+      <p class="price">$10.00</p>
+      <button onclick="addToCart('Producto 3', 10.00)">Añadir al carrito</button>
+    </div>
+
+    <div class="product">
+        <img src="https://fantiplasonline.com/wp-content/uploads/2020/07/SKU_SET-GEOMETRICO.png" alt="Producto 3">
+        <h3>JUEGO DE REGLAS</h3>
+        <p>Las medidas son lo fundamental para el cálculo y para eso me tienes</p>
+        <p class="price">$2.50</p>
+        <button onclick="addToCart('Producto 3', 10.00)">Añadir al carrito</button>
+      </div>
+  </div>
+
+  <a href="carrito.html" class="cart-link">Ver carrito</a>
+
+  <script>
+    // Arreglo para almacenar los productos del carrito
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    // Función para añadir productos al carrito
+    function addToCart(producto, precio) {
+      const item = { producto, precio, cantidad: 1 };
+      carrito.push(item);
+      localStorage.setItem('carrito', JSON.stringify(carrito)); // Guardar en localStorage
+    }
+  </script>
+
+</body>
+</html>
